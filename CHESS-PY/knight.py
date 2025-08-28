@@ -1,4 +1,4 @@
-class knight:
+class Knight:
 
     white_knight = "♘"
     black_knight = "♞"
