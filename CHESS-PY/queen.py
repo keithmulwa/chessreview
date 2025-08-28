@@ -51,5 +51,5 @@ class Queen:
         board.board[self.y][self.x] = None
         self.x, self.y = new_x, new_y
         board.board[new_y][new_x] = self
-        print(f"Moved bishop to ({new_x}, {new_y})")
+        print(f"Moved Queen to ({new_x}, {new_y})")
         return True    
