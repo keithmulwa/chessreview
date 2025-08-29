@@ -19,6 +19,9 @@ class Model:
             self.game_id = None
     
     def start_game(self, player1, player2):
+        if not self.conn:
+            print("No database connection in start_game")
+            return None
         try:
             cursor = self.conn.cursor()
             cursor.execute('''

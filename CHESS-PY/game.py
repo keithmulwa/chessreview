@@ -19,7 +19,13 @@ class Game:
         self.is_game_over = False
         self.model = Model()
         if self.model.conn:
-            self.model.start_game(self.player_white, self.player_black)
+            game_id = self.model.start_game(self.player_white, self.player_black)
+            if game_id:
+                print(f"Game started successfully with ID: {game_id}")
+            else:
+                print("Failed to start game in database")
+        else:
+            print("No database connection available")
 
     def switch_turn(self):
 
