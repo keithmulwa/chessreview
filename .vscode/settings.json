@@ -6,8 +6,8 @@
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "Chess",
-            "username": "postgres.qmtugcmklltxnnqvmvbb",
             "database": "postgres",
+            "username": "postgres.qmtugcmklltxnnqvmvbb",
             "password": "#Ongeri_Groot"
         }
     ]
