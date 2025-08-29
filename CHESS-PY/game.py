@@ -2,6 +2,7 @@
 from move import MoveLogic
 from ai_logic import AILogic
 from board import Board
+from model import Model
 
 class Game:
     
@@ -16,6 +17,9 @@ class Game:
         self.ai = AILogic("black")
         self.current_turn = "white"
         self.is_game_over = False
+        self.model = Model()
+        if self.model.conn:
+            self.model.start_game(self.player_white, self.player_black)
 
     def switch_turn(self):
 
@@ -50,12 +54,12 @@ class Game:
             return None
         
         for part in parts:
-            if not part.isdigit():
+            if not part.strip().isdigit():
                 print(f"Invalid input: '{part}' is not a number.")
                 return None
         
-        x = int(parts[0]) 
-        y = int(parts[1]) 
+        x = int(parts[0].strip()) 
+        y = int(parts[1].strip()) 
         
         print(f"User input: horizontal = {x}, vertical = {y}")
 
@@ -88,10 +92,21 @@ class Game:
                 # AI move
                 piece, move = self.ai.choose_move(self.board)
                 if piece and move:
+                    from_pos = (piece.x, piece.y)
                     moved = self.move_logic.execute_move(piece, move)
                     if moved:
                         move_str = self.board_coords_to_display(*move)
                         print(f"AI moved {piece.symbol} to {move_str}")
+                        
+                        # Log AI move to database
+                        if self.model.conn:
+                            move_data = {
+                                'piece': piece.symbol,
+                                'from': from_pos,
+                                'to': move
+                            }
+                            self.model.log_move(move_data, self.current_turn)
+                        
                         self.switch_turn()
                     else:
                         print("AI move failed.")
@@ -145,6 +160,16 @@ class Game:
             if moved:
                 move_str = self.board_coords_to_display(to_x, to_y)
                 print(f"{self.get_player_name()} moved {piece.symbol} to {move_str}")
+                
+                # Log move to database
+                if self.model.conn:
+                    move_data = {
+                        'piece': piece.symbol,
+                        'from': (from_x, from_y),
+                        'to': (to_x, to_y)
+                    }
+                    self.model.log_move(move_data, self.current_turn)
+                
                 self.switch_turn()  
             else:
                 print("Move failed.")

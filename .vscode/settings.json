@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "aws-1-ap-southeast-1.pooler.supabase.com",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Chess",
+            "database": "postgres",
+            "username": "postgres.qmtugcmklltxnnqvmvbb",
+            "password": "#Ongeri_Groot"
+        }
+    ]
+}
