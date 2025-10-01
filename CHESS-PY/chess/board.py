@@ -1,9 +1,9 @@
-from pawn import Pawn
-from rook import Rook
-from bishop import Bishop
-from queen import Queen
-from knight import Knight
-from king import King
+from .pawn import Pawn
+from .rook import Rook
+from .bishop import Bishop
+from .queen import Queen
+from .knight import Knight
+from .king import King
 
 class Board:
 

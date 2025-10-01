@@ -1,4 +1,4 @@
-from move import MoveLogic
+from .move import MoveLogic
 import random
 
 class AILogic:
